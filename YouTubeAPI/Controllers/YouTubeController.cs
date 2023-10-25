@@ -37,6 +37,13 @@ public class YouTubeController : ControllerBase
 			.OrderByDescending(x => x.PublishDate)
 			.ToList();
 
-		return Ok(videoList);
+		var response = new YouTubeResponse
+		{
+			Videos=videoList,
+			NextPageToken = searchResponse.NextPageToken,
+			PrevPageToken= searchResponse.PrevPageToken
+		};
+
+		return Ok(response);
 	}
 }
